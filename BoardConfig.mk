@@ -1,5 +1,6 @@
 # Copyright (C) 2013-2016, The CyanogenMod Project
 # Copyright (C) 2017, The LineageOS Project
+# Copyright (C) 2017 The halogenOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,6 +35,14 @@ BOARD_VENDOR := zuk
 # Use Snapdragon LLVM, if available
 TARGET_USE_SDCLANG := true
 
+# SDclang
+LLVM_PREBUILTS_PATH := $(realpath $(TOP))/prebuilts/clang/linux-x86/arm-multiarch-linux-android-llvm-3.8/bin
+LLVM_RTLIB_PATH := $(realpath $(TOP))/prebuilts/clang/linux-x86/arm-multiarch-linux-android-llvm-3.8/lib/clang/3.8.2/lib/linux
+CLANG := $(LLVM_PREBUILTS_PATH)/clang
+CLANG_CXX := $(LLVM_PREBUILTS_PATH)/clang++
+LLVM_AS := $(LLVM_PREBUILTS_PATH)/llvm-as
+LLVM_LINK := $(LLVM_PREBUILTS_PATH)/llvm-link
+
 # Bootanimaion
 TARGET_BOOTANIMATION_MULTITHREAD_DECODE := true
 TARGET_BOOTANIMATION_PRELOAD := true
@@ -56,27 +65,17 @@ TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := kryo
-
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := kryo
-
+TARGET_2ND_CPU_VARIANT := cortex-a53
 ENABLE_CPUSETS := true
-
+ENABLE_SCHED_BOOST := true
 TARGET_USES_64_BIT_BINDER := true
 
-# SDclang
-LLVM_PREBUILTS_PATH := $(realpath $(TOP))/prebuilts/clang/linux-x86/arm-multiarch-linux-android-llvm-3.8/bin
-LLVM_RTLIB_PATH := $(realpath $(TOP))/prebuilts/clang/linux-x86/arm-multiarch-linux-android-llvm-3.8/lib/clang/3.8.2/lib/linux
-CLANG := $(LLVM_PREBUILTS_PATH)/clang
-CLANG_CXX := $(LLVM_PREBUILTS_PATH)/clang++
-LLVM_AS := $(LLVM_PREBUILTS_PATH)/llvm-as
-LLVM_LINK := $(LLVM_PREBUILTS_PATH)/llvm-link
-
 # Kernel
-BOARD_KERNEL_CMDLINE := console=tty60,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=16M@0-0xffffffff
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=16M@0-0xffffffff
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -86,35 +85,17 @@ TARGET_KERNEL_APPEND_DTB := true
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_KERNEL_CONFIG := lineageos_z2_plus_defconfig
+TARGET_KERNEL_CONFIG := z2_plus_defconfig
 TARGET_KERNEL_SOURCE := kernel/zuk/msm8996
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
 
+# Webview defs
+PREBUILT_WEBVIEW_VERSION := chromium
+
 # Audio
-AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
-AUDIO_FEATURE_ENABLED_ACDB_LICENSE := true
-AUDIO_FEATURE_ENABLED_ALAC_OFFLOAD := true
-AUDIO_FEATURE_ENABLED_ANC_HEADSET := true
-AUDIO_FEATURE_ENABLED_AUDIOSPHERE := true
-AUDIO_FEATURE_ENABLED_COMPRESS_VOIP := true
-AUDIO_FEATURE_ENABLED_DEV_ARBI := true
-AUDIO_FEATURE_ENABLED_EXTN_FORMATS := true
-AUDIO_FEATURE_ENABLED_FLAC_OFFLOAD := true
-AUDIO_FEATURE_ENABLED_FLUENCE := true
-AUDIO_FEATURE_ENABLED_HFP := true
-AUDIO_FEATURE_ENABLED_KPI_OPTIMIZE := true
-AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
-AUDIO_FEATURE_ENABLED_NT_PAUSE_TIMEOUT := true
-AUDIO_FEATURE_ENABLED_PCM_OFFLOAD := true
-AUDIO_FEATURE_ENABLED_PCM_OFFLOAD_24 := true
-AUDIO_FEATURE_ENABLED_PROXY_DEVICE := true
-AUDIO_FEATURE_ENABLED_SPKR_PROTECTION := true
-BOARD_SUPPORTS_SOUND_TRIGGER := true
-BOARD_USES_ALSA_AUDIO := true
-USE_CUSTOM_AUDIO_POLICY := 1
-#USE_XML_AUDIO_POLICY_CONF := 1
+-include hardware/qcom/audio/configs/msm8996/msm8996.mk
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_PATH)/bluetooth
@@ -123,6 +104,9 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 QCOM_BT_USE_BTNV := true
 QCOM_BT_USE_SMD_TTY := true
+
+
+TARGET_QCOM_AUDIO_VARIANT := caf-msm8996
 
 # Camera
 BOARD_QTI_CAMERA_32BIT_ONLY := true
@@ -133,7 +117,19 @@ TARGET_CAMERASERVICE_CLOSES_NATIVE_HANDLES := true
 # Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
-BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
+
+
+# CM Hardware
+BOARD_HARDWARE_CLASS += $(PLATFORM_PATH)/cmhw
+TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/touch/tp_dev/gesture_on"
+BOARD_USES_CYANOGEN_HARDWARE := true
+BOARD_HARDWARE_CLASS += \
+    hardware/cyanogen/cmhw
+
+# power hal
+TARGET_PROVIDES_POWERHAL := true
+TARGET_USES_INTERACTION_BOOST := true
+
 
 # CNE and DPM
 TARGET_LDPRELOAD := libNimsWrap.so
@@ -141,7 +137,7 @@ BOARD_USES_QCNE := true
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
-
+TARGET_CRYPTFS_HW_PATH := device/zuk/z2_plus/cryptfs_hw
 # Display
 BOARD_USES_ADRENO := true
 TARGET_CONTINUOUS_SPLASH_ENABLED := true
@@ -151,6 +147,7 @@ TARGET_USES_OVERLAY := true
 USE_OPENGL_RENDERER := true
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
 MAX_VIRTUAL_DISPLAY_DIMENSION := 4096
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
@@ -182,16 +179,11 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3154116608
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 57436708864
 BOARD_FLASH_BLOCK_SIZE := 262144
 
-# Power
-TARGET_PROVIDES_POWERHAL := true
-BOARD_HAL_STATIC_LIBRARIES := libdumpstate.msm8996
+# QCOM Power
+TARGET_POWERHAL_VARIANT := qcom
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.qcom
-#TARGET_RECOVERY_UI_LIB := librecovery_ui_msm
-#TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_msm
-#TARGET_RELEASETOOLS_EXTENSIONS := device/qcom/common
-#BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
@@ -202,9 +194,6 @@ BOARD_SEPOLICY_DIRS += $(PLATFORM_PATH)/sepolicy
 
 # Sensors
 USE_SENSOR_MULTI_HAL := true
-
-# Tap to wake 
-TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/touch/tp_dev/gesture_on"
 
 # Timeservice
 BOARD_USES_QC_TIME_SERVICES := true
@@ -224,6 +213,13 @@ WIFI_DRIVER_FW_PATH_P2P := "p2p"
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME := "wlan"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
+
+#ril
+PRODUCT_PACKAGES += \
+    telephony-ext
+
+PRODUCT_BOOT_JARS += \
+telephony-ext
 
 # inherit from the proprietary version
 -include vendor/zuk/z2_plus/BoardConfigVendor.mk
