@@ -100,29 +100,5 @@
     "repository": "android_device_qcom_caf-sepolicy",
     "target_path": "device/qcom/sepolicy",
     "revision": "android-7.0"
-     },
-     {
-      "remote": "LineageOS",
-    "repository": "android_packages_resources_devicesettings",
-    "target_path": "packages/resources/devicesettings",
-    "revision": "cm-14.1"
-     },
-    { 
-     "remote": "github",
-    "repository": "z2-dev/android_kernel_zuk_msm8996",
-    "target_path": "kernel/zuk/msm8996",
-    "revision": "cm-14.1"
-     },
-     { 
-     "remote": "github",
-    "repository": "z2-dev/proprietary_vendor_zuk_z2_plus",
-    "target_path": "vendor/zuk/z2_plus",
-    "revision": "cm-14.1"
-     },
-     { 
-     "remote": "omnirom",
-    "repository": "android_hardware_qcom_camera",
-    "target_path": "hardware/qcom/camera",
-    "revision": "android-7.1"
      }
 ]
