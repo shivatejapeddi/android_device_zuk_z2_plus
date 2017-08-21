@@ -89,12 +89,6 @@
     "target_path": "external/stlport",
     "revision": "android-7.0"
     },
-     {
-      "remote": "LineageOS",
-    "repository": "android_device_qcom_common",
-    "target_path": "device/qcom/common",
-    "revision": "cm-14.1"
-    },
     { 
      "remote": "omnirom",
     "repository": "android_device_qcom_caf-sepolicy",
