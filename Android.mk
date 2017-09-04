@@ -119,6 +119,7 @@ LOCAL_PRIVILEGED_MODULE := true
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
+<<<<<<< HEAD:Android.mk
 LOCAL_MODULE := colorservice
 LOCAL_MODULE_OWNER := zuk
 LOCAL_SRC_FILES := proprietary/vendor/app/colorservice/colorservice.apk
