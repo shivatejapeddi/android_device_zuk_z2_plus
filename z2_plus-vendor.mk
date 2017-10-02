@@ -617,6 +617,7 @@ PRODUCT_COPY_FILES += \
     vendor/zuk/z2_plus/proprietary/etc/permissions/dpmapi.xml:system/etc/permissions/dpmapi.xml \
     vendor/zuk/z2_plus/proprietary/etc/permissions/com.qti.dpmframework.xml:system/etc/permissions/com.qti.dpmframework.xml \
     vendor/zuk/z2_plus/proprietary/etc/permissions/com.quicinc.cne.xml:system/etc/permissions/com.quicinc.cne.xml \
+    vendor/zuk/z2_plus/proprietary/etc/permissions/qti-vzw-ims-internal.xml:system/etc/permissions/qti-vzw-ims-internal.xml \
     vendor/zuk/z2_plus/proprietary/lib64/lib_fpc_tac_shared.so:system/lib64/lib_fpc_tac_shared.so \
     vendor/zuk/z2_plus/proprietary/lib64/libloc_ds_api.so:system/lib64/libloc_ds_api.so \
     vendor/zuk/z2_plus/proprietary/lib64/libloc_eng.so:system/lib64/libloc_eng.so \
