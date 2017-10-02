@@ -630,6 +630,7 @@ PRODUCT_COPY_FILES += \
     vendor/zuk/z2_plus/proprietary/bin/mm-qcamera-app:system/bin/mm-qcamera-app \
     vendor/zuk/z2_plus/proprietary/bin/imsdatadaemon:system/bin/imsdatadaemon \
     vendor/zuk/z2_plus/proprietary/bin/imscmservice:system/bin/imscmservice \
+    vendor/zuk/z2_plus/proprietary/bin/imscmservice:system/bin/imsrcsd \
     vendor/zuk/z2_plus/proprietary/bin/time_daemon:system/bin/time_daemon \
     vendor/zuk/z2_plus/proprietary/bin/cnss-daemon:system/bin/cnss-daemon \
     vendor/zuk/z2_plus/proprietary/bin/wcnss_filter:system/bin/wcnss_filter \
