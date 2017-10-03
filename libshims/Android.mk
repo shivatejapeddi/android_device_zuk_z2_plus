@@ -31,3 +31,12 @@ LOCAL_MODULE := rild_socket
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := imsshim.c
+
+LOCAL_MODULE := libshims_imsshim
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)

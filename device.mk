@@ -118,7 +118,8 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     SnapdragonCamera \
-    libshim_camera
+    libshim_camera \
+    libshims_imsshim
 
 # Display
 PRODUCT_PACKAGES += \
@@ -176,7 +177,7 @@ PRODUCT_PACKAGES += \
 # IPC router config
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
-	
+
 # Thermal
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine.conf
@@ -257,7 +258,6 @@ PRODUCT_PACKAGES += \
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl
->>>>>>> f68b595... oneplus3: Add rild socket shim
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
